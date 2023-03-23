@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Grommet, Box, Button } from "grommet";
-import { Link } from "react-router-dom";
 import EmailInputModal from "./EmailInputModal";
 
 function Footer2({ selectedSurveys }) {

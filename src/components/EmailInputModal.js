@@ -46,7 +46,7 @@ const EmailInputModal = ({ onClose, onSubmit }) => {
     <Layer onEsc={onClose} onClickOutside={onClose}>
       <Box pad="medium" gap="medium">
         <Box direction="row" justify="between">
-          <Heading level="3">Podaj swoje dane na które otrzymasz wyniki ankiety</Heading>
+          <Heading level="3">Podaj swoje dane otrzymasz na nie wasz wspólny wynik ankiety</Heading>
           <Button icon={<FormClose />} onClick={onClose} />
         </Box>
         <Form onSubmit={handleSubmit}>

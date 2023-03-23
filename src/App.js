@@ -5,14 +5,14 @@ import SurveyCard from "./components/SurveyCard";
 import Footer2 from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import QuestionsPage from "./components/QuestionsPage";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./store";
-import { useSelector } from 'react-redux'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredSurveys = store.getState().surveys.filter((survey) =>
+  const surveys = useSelector((state) => state.surveys);
+  const filteredSurveys = surveys.filter((survey) =>
     survey.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -46,3 +46,6 @@ function App() {
 }
 
 export default App;
+
+
+

@@ -1,7 +1,6 @@
 import React from "react";
 import { Grommet, Box, Header, Anchor, Nav, TextInput } from "grommet";
 import { FormSearch } from "grommet-icons";
-import Logo from "../logo.svg";
 
 function NavigationBar({ handleSearchChange }) {
   return (
@@ -13,11 +12,9 @@ function NavigationBar({ handleSearchChange }) {
       >
         <Header>
           <Nav>
-            <Anchor href="/" color="white" size="large" weight="bold">
-            <img src="../logo.svg" alt="logo"/>
-
-              {/* <Logo height="40px" /> */}
-            </Anchor>
+            <Anchor href="/" color="white" size="large" weight="bold" style={{ marginLeft: "5px" }}>
+              <img src="/logop.png" alt="logo" />
+             </Anchor>  
           </Nav>
           <Box direction="row" justify="end" gap="medium" align="center">
             <FormSearch color="white" size="large" />

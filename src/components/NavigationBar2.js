@@ -11,7 +11,7 @@ function NavigationBar2() {
         <Header>
           <Nav>
             <Anchor href="/" color="white" size="large" weight="bold">
-            <img src="../logo.svg" alt="logo"/>
+            <img src="./logop.png" alt="logo"/>
 
               {/* <Logo height="40px" /> */}
             </Anchor>
