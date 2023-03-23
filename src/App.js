@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { useState } from "react";
+import NavigationBar from "./components/NavigationBar";
+import SurveyCard from "./components/SurveyCard";
+import Footer2 from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import QuestionsPage from "./components/QuestionsPage";
+import { Provider } from "react-redux";
+import store from "./store";
+import { useSelector } from 'react-redux'
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredSurveys = store.getState().surveys.filter((survey) =>
+    survey.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/questions" element={<QuestionsPage />} />
+          <Route
+            path="/"
+            element={
+              <div style={{ paddingTop: "40px", paddingBottom: "70px" }}>
+                <NavigationBar handleSearchChange={handleSearchChange} />
+               
+                {filteredSurveys.map((survey) => (
+                  
+                  <SurveyCard key={survey.name} surveyName={survey.name} surveyId={survey.id} survey = {survey} />
+                ))}
+                <Footer2 selectedSurveys={filteredSurveys} />
+              </div>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
