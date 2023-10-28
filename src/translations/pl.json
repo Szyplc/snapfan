@@ -1,0 +1,32 @@
+{
+    "welcomeMessage": "Witaj na stronie z SNAPFUN.IO z Ankietami chcesz poznać łączące was kwestie.\nWybierz które ankiety chcesz rozwiązać zaznaczając je.\nNastępnie rozwiąż ankietę.\nNa końcu otrzymasz link po wysłaniu którego do twojego partnera/potencjalnej drugiej połówki oraz wypełnieniu przez nią wybranych wcześniej przez ciebie ankiet\nObaje otrzymacie maile z MATCHUJACYMI się odpowiedziami (TYLKO TAK) wszystkie odpowiedzi gdzie się nie zgadzacie oraz wspólne odpowiedzi na NIE zostaną pominięte.",
+    "closeInstructions":"Zamknij Instrukcję",
+    "search": "Search",
+    "button_solve": "Rozwiąz",
+    "next":"Dalej",
+    "email_invalid": "Podaj poprawny adres email. Nie będziemy mogli przesłać Ci wyników ankiety",
+"name_invalid": "Nazwa musi mieć co najmniej 3 znaki.",
+"provide_details_to_receive_link": "Podaj swoje dane, aby otrzymać link do ankiety",
+"provide_details_to_receive_email":"Podaj swoje dane, aby otrzymać emaila z wynikami ankiety",
+
+"email": "E-mail",
+"name": "Nazwa",
+"send_email": "Wyślij e-mail",
+"generate_link": "Wygeneruj link",
+"survey_link_below": "Poniżej znajduje się link do ankiety. Teraz możesz skopiować i udostępnić link wybranej osobie.",
+"link_copied":"Link skopiowany",
+"check_spam":"Dostaniesz Email zaraz po tym jak druga osoba rozwiąże twoją Ankietą. Email może znajdować się w folderze spam dla niektórych dostawców.",
+"email_sent":"Email wysłany. Email może znajdować się w folderze spam dla niektórych dostawców.",   
+"add_review": "Dodaj recenzję",
+"what_do_you_like": "Co Ci się podoba?",
+"what_you_dont_like": "Co Ci się nie podoba?",
+"what_would_you_add": "Co byś dodał?",
+"do_you_want_dating_app_like_that": "Czy chcesz aplikację randkową taką jak ta?",
+"leave_your_email_if_you_want_to_stay_in_touch": "Podaj swój e-mail, jeśli chcesz pozostać w kontakcie",
+"feedback_sent": "Opinia wysłana!",
+"something went wrong": "Coś poszło nie tak...",
+"Send_Review": "Wyślij opinię"
+
+
+
+}

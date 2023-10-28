@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Grommet, Box, Button } from "grommet";
-import EmailInputModal from "./EmailInputModal";
+import AddReview from "./AddReview";
 import { LanguageContext } from "../LanguageProvider";
 
-function Footer2({ selectedSurveys }) {
+function Footer3({  }) {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState(null);
   const { translate } = React.useContext(LanguageContext);
@@ -40,7 +40,7 @@ function Footer2({ selectedSurveys }) {
         </Box>
       </Box>
       {showModal && (
-        <EmailInputModal
+        <AddReview
           onClose={handleModalClose}
           onSubmit={handleModalSubmit}
         />
@@ -49,4 +49,4 @@ function Footer2({ selectedSurveys }) {
   );
 }
 
-export default Footer2;
+export default Footer3;

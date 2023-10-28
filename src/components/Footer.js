@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grommet, Box, Button } from "grommet";
 import { Link } from "react-router-dom";
+import { LanguageContext } from "../LanguageProvider";
 
+function Footer({ selectedSurveys }) {
+  const { translate } = useContext(LanguageContext);
 
-function Footer2({ selectedSurveys }) {
   const handleClick = () => {
     // send the selected surveys to the next page
   };
@@ -26,7 +28,7 @@ function Footer2({ selectedSurveys }) {
               state: { surveys: selectedSurveys },
             }}
           >
-            <Button label="Rozwiąż" className="orange-button" onClick={handleClick} />
+            <Button label={translate("button_solve")} className="orange-button" onClick={handleClick} />
           </Link>
         </Box>
       </Box>
@@ -34,4 +36,4 @@ function Footer2({ selectedSurveys }) {
   );
 }
 
-export default Footer2;
+export default Footer;

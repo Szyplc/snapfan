@@ -1,0 +1,25 @@
+.answered-yes {
+  background-color: lightgreen !important;
+}
+
+.answered-no {
+  background-color: lightcoral !important;
+}
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .answer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .answer-container label {
+    margin: 0 0.5rem;
+  }
+  
