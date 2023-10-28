@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import { Grommet, Box, Header, Anchor, Nav, TextInput, Select } from "grommet";
 import { FormSearch } from "grommet-icons";
 import { LanguageContext } from "../LanguageProvider";
+import { useNavigate } from "react-router-dom";
 
 
 function NavigationBar({ handleSearchChange }) {
   const languageOptions = ["EN", "PL"];
   const { language, setLanguage, translate } = React.useContext(LanguageContext);
-  const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[1]);
+  const [selectedLanguage, setSelectedLanguage] = useState(language);
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
     setLanguage(event.target.value.toLowerCase());
   };
+  
+  const navigate = useNavigate();
+  const goHome = () => {
+    navigate("/")
+  }
 
   return (
     <Grommet>
@@ -23,7 +29,7 @@ function NavigationBar({ handleSearchChange }) {
       >
         <Header>
           <Nav>
-            <Anchor href="/" color="white" size="large" weight="bold" style={{ marginLeft: "5px" }}>
+            <Anchor onClick={goHome}color="white" size="large" weight="bold" style={{ marginLeft: "5px" }}>
               <img src="/logop.png" alt="logo" />
             </Anchor>  
           </Nav>
@@ -39,7 +45,7 @@ function NavigationBar({ handleSearchChange }) {
           <Box style={{ width:90 }}>
             <Select
               options={languageOptions}
-              value={selectedLanguage}
+              value={selectedLanguage.toUpperCase()}
               onChange={handleLanguageChange}
             />
           </Box>
