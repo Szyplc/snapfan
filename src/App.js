@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { fetchSurveys } from './store';
 import { LanguageContext } from "./LanguageProvider";
 import { LanguageProvider } from "./LanguageProvider";
+import Instructions from "./components/Instructions";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
   }, [dispatch]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSurveyInfoBarVisible, setIsSurveyInfoBarVisible] = useState(true);
+  const [isSurveyInfoBarVisible, setIsSurveyInfoBarVisible] = useState(false);
 
   const surveys = useSelector((state) => state.surveys);
   const filteredSurveys = surveys.filter((survey) => {
@@ -37,7 +38,7 @@ function App() {
   };
 
   const handleSurveyInfoBarClose = () => {
-    setIsSurveyInfoBarVisible(false);
+    setIsSurveyInfoBarVisible(!isSurveyInfoBarVisible);
   };
   useEffect(() => {console.log(LanguageContext.language)}, [])
   useEffect(() => {console.log(LanguageProvider.language)}, [])
@@ -58,16 +59,14 @@ function App() {
             element={
               <div style={{ paddingTop: "40px", paddingBottom: "70px" }}>
                 {isSurveyInfoBarVisible && (
-                  <div style={{ backgroundColor: "#f0f0f0", padding: "10px", display: "flex", justifyContent: "space-between" }}>
-                    <div>{translate('welcomeMessage')}</div>
-                    <div style={{ cursor: "pointer", color: "blue" }} onClick={handleSurveyInfoBarClose}>{translate('closeInstructions')}</div>
-                  </div>
+                  <Instructions handleSurveyInfoBarClose={handleSurveyInfoBarClose} />
                 )}
-                <NavigationBar handleSearchChange={handleSearchChange} />
-                {filteredSurveys.map((survey) => (
+                <NavigationBar handleSearchChange={handleSearchChange} handleSurveyInfoBarClose={handleSurveyInfoBarClose} />
+                {!isSurveyInfoBarVisible && filteredSurveys.map((survey) => (
                   <SurveyCard key={survey._id} surveyName={language=="en" ? survey.title : survey.title_pl} surveyId={survey._id} survey={survey} />
                 ))}
-                <Footer selectedSurveys={filteredSurveys} />
+                {!isSurveyInfoBarVisible && <Footer selectedSurveys={filteredSurveys} />}
+                
               </div>
             }
           />

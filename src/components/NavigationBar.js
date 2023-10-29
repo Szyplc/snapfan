@@ -5,7 +5,7 @@ import { LanguageContext } from "../LanguageProvider";
 import { useNavigate } from "react-router-dom";
 
 
-function NavigationBar({ handleSearchChange }) {
+function NavigationBar({ handleSearchChange, handleSurveyInfoBarClose }) {
   const languageOptions = ["EN", "PL"];
   const { language, setLanguage, translate } = React.useContext(LanguageContext);
   const [selectedLanguage, setSelectedLanguage] = useState(language);
@@ -27,7 +27,7 @@ function NavigationBar({ handleSearchChange }) {
         background="brand"
         style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1 }}
       >
-        <Header>
+        <Header style={{display: "flex"}}>
           <Nav>
             <Anchor onClick={goHome}color="white" size="large" weight="bold" style={{ marginLeft: "5px" }}>
               <img src="/logop.png" alt="logo" />
@@ -42,7 +42,12 @@ function NavigationBar({ handleSearchChange }) {
               color="white"
             />
           </Box>
-          <Box style={{ width:90 }}>
+          <Nav onClick={handleSurveyInfoBarClose}>
+            <Anchor>
+              <img src="./logop3.png" />
+            </Anchor>
+          </Nav>
+          <Box style={{ width: 90, minWidth: "65pt" }}>
             <Select
               options={languageOptions}
               value={selectedLanguage.toUpperCase()}
