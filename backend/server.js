@@ -63,7 +63,6 @@ app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 
-
 app.post('/solved-surveys', async (req, res) => {
   const { userId } = req.body;
   
@@ -102,11 +101,7 @@ app.post('/solved-surveys', async (req, res) => {
   }
 });
 
-
-
-
 app.get('/send-email', function (req, res) {
-
 
 // Tworzenie transportera SMTP
 try{
@@ -118,7 +113,7 @@ try{
           // user: 'postmaster@snapfun.io', // adres email
           // pass: 'test123!@' // hasło do konta email
 
-            user: 'snapfan@snapfan.com', // adres email
+            user: 'snapfan@snapfan.io', // adres email
             pass: 'kYssex-fygvy7-zarziq' // hasło do konta email
         }
     });
@@ -146,8 +141,6 @@ try{
 
   }catch{}
 });
-
-
 
 //endpint to answear survey
 app.post('/survey/:surveyId/response', async (req, res) => {
@@ -179,9 +172,8 @@ app.post('/survey/:surveyId/response', async (req, res) => {
         });
     }
 });
+
 // Endpoint to create a new survey
-
-
 app.post('/surveys', async (req, res) => {
     const { title, questions } = req.body;
     const survey = new Survey({
@@ -206,9 +198,6 @@ app.post('/surveys', async (req, res) => {
       res.status(500).send(error);
     }
   });
-
-
-
 
 app.get('/surveys-from-user/:solvedsurveybyusersId', async (req, res) => {
     
@@ -272,9 +261,6 @@ app.get('/surveys/:ids?', async function (req, res) {
       return res.status(500).send('Error getting surveys');
     }
   });
-
-
-
 
 app.post('/generate-link', async (req, res) => {
     try {
@@ -356,8 +342,8 @@ app.post('/generate-link', async (req, res) => {
       });
     }
   });
-  app.post('/compare-survey-answers', async (req, res) => {
 
+  app.post('/compare-survey-answers', async (req, res) => {
 
     //Zapisanie przychodzącej ankiety
 
@@ -547,7 +533,7 @@ app.post('/generate-link', async (req, res) => {
               port: 587, // SMTP port for SSL/TLS (usually 465 for SSL)
               secure: 'tls', // Use SSL/TLS
               auth: {
-                user: 'snapfan@snapfan.com', // Your email address
+                user: 'snapfan@snapfan.io', // Your email address
                 pass: 'kYssex-fygvy7-zarziq', // Your email password or app-specific password
               },
             });
@@ -557,7 +543,7 @@ app.post('/generate-link', async (req, res) => {
             
             // Set email options
             const mailOptions = {
-              from: 'snapfan@snapfan.com', // Sender's email address
+              from: 'snapfan@snapfan.io', // Sender's email address
               bcc: [userA.email, userB[0].user[0].email, 'kzyzulek@gmail.com'], // BCC recipients
               subject: 'Survey Results SnapFan.io', // Email subject
               text: 'Thank you for using Snapfan. Here is the link to the survey results. ' + link, // Email body
@@ -792,13 +778,7 @@ app.post('/generate-link', async (req, res) => {
     }
 })
   
-
-
-
-
-
 //Endpoint for Adding user
-
 app.post('/user', async (req, res) => {
     try {
       const newUser = await User.create(req.body);
@@ -853,8 +833,6 @@ app.get('/surveys/:ids?', async function (req, res) {
       return res.status(500).send('Error getting surveys');
     }
   });
-
-
 
 app.get('/surveyslist', async (req, res) => {
     try {
