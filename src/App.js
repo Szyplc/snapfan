@@ -29,8 +29,14 @@ function App() {
 
   const surveys = useSelector((state) => state.surveys);
   const filteredSurveys = surveys.filter((survey) => {
-    const title = survey.title;
-    return title && title.toLowerCase().includes(searchQuery.toLowerCase());
+    if(language == "pl") {
+      const title_pl = survey.title_pl;
+      return title_pl && title_pl.toLowerCase().includes(searchQuery.toLowerCase());
+    } else if(language == "en") {
+      const title = survey.title;
+      return title && title.toLowerCase().includes(searchQuery.toLowerCase());
+    }
+    
   });
 
   const handleSearchChange = (event) => {
@@ -38,8 +44,13 @@ function App() {
   };
 
   const handleSurveyInfoBarClose = () => {
+    setIsSurveyInfoBarVisible(false);
+  };
+
+  const handleSurveyInfoBarSwitch = () => {
     setIsSurveyInfoBarVisible(!isSurveyInfoBarVisible);
   };
+
   useEffect(() => {console.log(LanguageContext.language)}, [])
   useEffect(() => {console.log(LanguageProvider.language)}, [])
   useEffect(() => {console.log(language)}, [language])
@@ -61,7 +72,7 @@ function App() {
                 {isSurveyInfoBarVisible && (
                   <Instructions handleSurveyInfoBarClose={handleSurveyInfoBarClose} />
                 )}
-                <NavigationBar handleSearchChange={handleSearchChange} handleSurveyInfoBarClose={handleSurveyInfoBarClose} />
+                <NavigationBar handleSearchChange={handleSearchChange} handleSurveyInfoBarClose={handleSurveyInfoBarClose} handleSurveyInfoBarSwitch={handleSurveyInfoBarSwitch} />
                 {!isSurveyInfoBarVisible && filteredSurveys.map((survey) => (
                   <SurveyCard key={survey._id} surveyName={language=="en" ? survey.title : survey.title_pl} surveyId={survey._id} survey={survey} />
                 ))}

@@ -36,7 +36,7 @@ const AnswearPage = () => {
         
           let response = await axios.get(link);
           const solvedSurveys = response.data.matchedQuestions
-
+          console.log(solvedSurveys)
         store.dispatch(updateQuestionPageSurveys(solvedSurveys));
       } catch (error) {
         console.log(error);

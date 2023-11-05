@@ -15,7 +15,7 @@
 "generate_link": "Wygeneruj link",
 "survey_link_below": "Poniżej znajduje się link do ankiety. Teraz możesz skopiować i udostępnić link wybranej osobie.",
 "link_copied":"Link skopiowany",
-"check_spam":"Dostaniesz Email zaraz po tym jak druga osoba rozwiąże twoją Ankietą. Email może znajdować się w folderze spam dla niektórych dostawców.",
+"check_spam":"Jak druga osoba rozwiąże twoją ankiete, dostaniesz Email który może znajdować się w spamie.",
 "email_sent":"Email wysłany. Email może znajdować się w folderze spam dla niektórych dostawców.",   
 "add_review": "Dodaj recenzję",
 "what_do_you_like": "Co Ci się podoba?",

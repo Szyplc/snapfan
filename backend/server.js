@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
@@ -107,21 +108,23 @@ app.get('/send-email', function (req, res) {
 try{
     let transporter = nodemailer.createTransport({
         host: 'pro3.mail.ovh.net',
-        port:587,
-        secure: true, // Use SSL/TLS
+        port: 587,
+        tls: {
+          ciphers:'TLSv1.2'
+         },
         auth: {
           // user: 'postmaster@snapfun.io', // adres email
           // pass: 'test123!@' // hasło do konta email
 
             user: 'snapfan@snapfan.io', // adres email
             pass: 'kYssex-fygvy7-zarziq' // hasło do konta email
-        }
+        },
     });
 
     // Ustawianie opcji wysyłki email
     let mailOptions = {
-        from: 'snapfan@snapfun.io', // adres email nadawcy
-        to: 'kzyzulek@gmail.com', // adres email odbiorcy
+        from: 'snapfan@snapfan.io', // adres email nadawcy
+        to: "kzyzulek@gmail.com",//to: 'kzyzulek@gmail.com', // adres email odbiorcy
         subject: 'Testowy email', // temat emaila
         text: 'To jest testowy email wysłany za pomocą Node.js!' // treść emaila
     };
@@ -139,7 +142,7 @@ try{
         }
     });
 
-  }catch{}
+  }catch(err){console.error(err)}
 });
 
 //endpint to answear survey
@@ -344,7 +347,7 @@ app.post('/generate-link', async (req, res) => {
   });
 
   app.post('/compare-survey-answers', async (req, res) => {
-
+    console.log("enp 1")
     //Zapisanie przychodzącej ankiety
 
     try{
@@ -396,7 +399,7 @@ app.post('/generate-link', async (req, res) => {
       await newSolvedSurveysByUser.save();
 
       user.SolvedSurveyByUser.push(newSolvedSurveysByUser);
-    await user.save();
+      await user.save();
   
       const savedResponses = await Promise.all(
         responses.map(async (response, index) => {
@@ -531,10 +534,12 @@ app.post('/generate-link', async (req, res) => {
             const transporter = nodemailer.createTransport({
               host: 'pro3.mail.ovh.net', // SMTP server hostname
               port: 587, // SMTP port for SSL/TLS (usually 465 for SSL)
-              secure: 'tls', // Use SSL/TLS
-              auth: {
-                user: 'snapfan@snapfan.io', // Your email address
-                pass: 'kYssex-fygvy7-zarziq', // Your email password or app-specific password
+              tls: {
+                ciphers:'TLSv1.2'
+               },             
+                auth: {
+                  user: 'snapfan@snapfan.io', // Your email address
+                  pass: 'kYssex-fygvy7-zarziq', // Your email password or app-specific password
               },
             });
             
@@ -580,6 +585,7 @@ app.post('/generate-link', async (req, res) => {
 
 
   app.post('/compare-survey-answers', async (req, res) => {
+    console.log("endp2")
     try {
         const { name, email, responses, solvedSurveyByUserId } = req.body;
         const user = await User.findOne({ email }) || await User.create({ email, name });
@@ -657,6 +663,7 @@ app.post('/generate-link', async (req, res) => {
 
 
   app.post('/compare-survey-answers', async (req, res) => {
+    console.log("endp3")
     try {
         console.log(req.body.responses)
 
@@ -788,10 +795,14 @@ app.post('/user', async (req, res) => {
     }
   });
   
-
+  const httpServer = http.createServer(app);
+  httpServer.listen(3002, () => {
+    console.log("HTTP Server started on port 3002");
+  });
+  let options = {};
 
 try{
- const options = {
+ options = {
   key: fs.readFileSync('/etc/letsencrypt/live/snapfan.io/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/snapfan.io/fullchain.pem')
   };
@@ -815,6 +826,14 @@ try{
 
 });
 }
+
+app.use((req, res, next) => {
+  if(!req.secure) {
+    const host = req.headers['host'].replace(/:\d+$/, '');
+    return res.redirect(`https://${host}:3001${req.url}`);
+  }
+  next();
+})
 
 app.get('/surveys/:ids?', async function (req, res) {
   console.log("endpoint 1")

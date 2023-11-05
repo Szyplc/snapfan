@@ -114,6 +114,10 @@ const matchedQuestionsInSurveysSchema = new mongoose.Schema({
       type:String,
       required:true
     },
+    title_pl: {
+      type: String,
+      required: false
+    },
     questions:[
     {
       //questionId

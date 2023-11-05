@@ -5,7 +5,7 @@ import { LanguageContext } from "../LanguageProvider";
 import { useNavigate } from "react-router-dom";
 
 
-function NavigationBar({ handleSearchChange, handleSurveyInfoBarClose }) {
+function NavigationBar({ handleSearchChange, handleSurveyInfoBarClose, handleSurveyInfoBarSwitch }) {
   const languageOptions = ["EN", "PL"];
   const { language, setLanguage, translate } = React.useContext(LanguageContext);
   const [selectedLanguage, setSelectedLanguage] = useState(language);
@@ -18,6 +18,7 @@ function NavigationBar({ handleSearchChange, handleSurveyInfoBarClose }) {
   const navigate = useNavigate();
   const goHome = () => {
     navigate("/")
+    handleSurveyInfoBarClose();
   }
 
   return (
@@ -30,7 +31,7 @@ function NavigationBar({ handleSearchChange, handleSurveyInfoBarClose }) {
         <Header style={{display: "flex"}}>
           <Nav>
             <Anchor onClick={goHome}color="white" size="large" weight="bold" style={{ marginLeft: "5px" }}>
-              <img src="/logop.png" alt="logo" />
+              <img src="/logop3.png" alt="logo" />
             </Anchor>  
           </Nav>
           <Box direction="row" justify="end" gap="medium" align="center">
@@ -42,9 +43,9 @@ function NavigationBar({ handleSearchChange, handleSurveyInfoBarClose }) {
               color="white"
             />
           </Box>
-          <Nav onClick={handleSurveyInfoBarClose}>
+          <Nav onClick={handleSurveyInfoBarSwitch}>
             <Anchor>
-              <img src="./logop3.png" />
+              <img src="./question_mark_removed-background_small.png" alt="Instrukcja" />
             </Anchor>
           </Nav>
           <Box style={{ width: 90, minWidth: "65pt" }}>
