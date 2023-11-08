@@ -25,7 +25,7 @@ function App() {
   }, [dispatch]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSurveyInfoBarVisible, setIsSurveyInfoBarVisible] = useState(false);
+  const [isSurveyInfoBarVisible, setIsSurveyInfoBarVisible] = useState(true);
 
   const surveys = useSelector((state) => state.surveys);
   const filteredSurveys = surveys.filter((survey) => {

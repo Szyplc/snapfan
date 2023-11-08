@@ -29,7 +29,7 @@ function NavigationBar2({ handleSearchChange }) {
         <Header>
           <Nav>
             <Anchor onClick={goHome} color="white" size="large" weight="bold" style={{ marginLeft: "5px" }}>
-              <img src="/logop.png" alt="logo" />
+              <img src="/logop3.png" alt="logo" />
             </Anchor>  
           </Nav>
           <Box style={{ width:90 }}>

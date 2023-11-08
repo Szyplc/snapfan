@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-const http = require('http');
 const https = require('https');
+const http = require("http");
 const fs = require('fs');
 
 
@@ -27,6 +27,15 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.enable('trust proxy')
+app.use((request, response, next) => {
+
+  if (!request.secure) {
+     return response.redirect("https://" + request.headers.host + request.url);
+  }
+
+  next();
+})
 
 //mongodb://localhost/surveyApp
 mongoose.connect('mongodb+srv://kzyzulek:Test123@cluster0.opyzrkj.mongodb.net/?retryWrites=true&w=majority', {
@@ -794,12 +803,6 @@ app.post('/user', async (req, res) => {
       res.status(400).json({ message: error.message });
     }
   });
-  
-  const httpServer = http.createServer(app);
-  httpServer.listen(3002, () => {
-    console.log("HTTP Server started on port 3002");
-  });
-  let options = {};
 
 try{
  options = {
@@ -810,6 +813,11 @@ try{
   //   key: fs.readFileSync('./certificates/key.pem'),
   //   cert: fs.readFileSync('./certificates/cert.pem')
   // }
+  http.createServer(app).listen(80, () => {
+    console.log("Started http server on port 80");
+  })
+
+  
   const server = https.createServer(options, app);
 
   server.listen(3001, () => {
@@ -827,13 +835,6 @@ try{
 });
 }
 
-app.use((req, res, next) => {
-  if(!req.secure) {
-    const host = req.headers['host'].replace(/:\d+$/, '');
-    return res.redirect(`https://${host}:3001${req.url}`);
-  }
-  next();
-})
 
 app.get('/surveys/:ids?', async function (req, res) {
   console.log("endpoint 1")

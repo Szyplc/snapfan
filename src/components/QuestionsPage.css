@@ -23,3 +23,7 @@
     margin: 0 0.5rem;
   }
   
+  .header {
+    margin-top: -10px;
+    text-align: center;
+  }

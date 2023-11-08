@@ -89,10 +89,10 @@ const QuestionsPage = () => {
   return (
     <Grommet>
       <NavigationBar2 />
-      <Box pad="medium">
+      <Box pad="medium" style={{marginTop: 55}}>
         {questionPageSurveys.map((survey) => (
           <Box key={survey._id} margin={{ vertical: "medium" }}>
-            <Heading level={3}>{language == "en" ? survey.title : survey.title_pl}</Heading>
+            <Heading className="header" level={3}>{language == "en" ? survey.title : survey.title_pl}</Heading>
             {survey.questions.map((question, questionIndex) => {
               const cardClass = question.answer === true ? "answered-yes" : question.answer === false ? "answered-no" : "";
 

@@ -10,10 +10,10 @@ function Instructions({ handleSurveyInfoBarClose }) {
     <Grommet>
          <div style={{ backgroundColor: "#f0f0f0", padding: "5px", fontSize: "25px", letterSpacing: "0.1px", lineHeight: "115%", position: "absolute", 
             bottom: "60px", top: "65px", left: "10px", right: "10px", textAlign: "center" }}>
-            <div>{translate('welcomeMessage')}</div>
-            <Box style={{ cursor: "pointer", display: "inline-block", border: "2px solid rgb(111, 255, 176)",
+            <div id="welcomeMessage" dangerouslySetInnerHTML={{ __html: translate('welcomeMessage')}}></div>
+            {/* <Box style={{ cursor: "pointer", display: "inline-block", border: "2px solid rgb(111, 255, 176)",
             borderRadius: "18px", padding: "4px 22px", marginTop: "10px", fontSize: "18px" }} className="orange-button" background="brand" 
-            onClick={handleSurveyInfoBarClose}>{translate('closeInstructions')}</Box>
+            onClick={handleSurveyInfoBarClose}>{translate('closeInstructions')}</Box> */}
         </div>
         <Box
             as="footer"
