@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.enable('trust proxy')
 app.use((request, response, next) => {
 
-  if (!request.secure) {
+  if (false && !request.secure) {
      return response.redirect("https://" + request.headers.host + request.url);
   }
 
@@ -63,6 +63,7 @@ app.get('/matchedquestionsinsurveys/:id', async function (req, res) {
   const existingSurvey = await MatchedQuestionsInSurveys.findOne({
     _id: req.params.id
 });
+  console.log(existingSurvey)
   res.send(existingSurvey);
 });
 
@@ -333,6 +334,7 @@ app.post('/generate-link', async (req, res) => {
             questionId: answer._id,
             answer: answer.answer,
             question: answer.question,
+            question_pl: answer.question_pl
           }));
 
 
@@ -354,27 +356,20 @@ app.post('/generate-link', async (req, res) => {
   });
 
   app.post('/compare-survey-answers', async (req, res) => {
-    console.log("enp 1")
     //Zapisanie przychodzącej ankiety
-
     try{
-      console.log(req.body.responses)
 
-      const { name, email, responses } = req.body;
-      responses.surveyId = responses._id 
-
-  
+      const { name, email, responses, language } = req.body;
+      responses.surveyId = responses._id
       // Check if user exists
       let user = await User.findOne({ email });
       if (!user) {
         user = await User.create({ email, name });
       }
-  
       const surveyIds = responses.map((response) => response._id);
-  
       // Find all surveys by their ids
       const surveys = await Survey.find({ _id: { $in: surveyIds } });
-  
+
       // Check if all surveys exist
       if (surveys.length !== surveyIds.length) {
         return res.status(404).json({
@@ -392,9 +387,6 @@ app.post('/generate-link', async (req, res) => {
           return solvedSurvey;
         })
       );
-      
-  
-   
 
       const newSolvedSurveysByUser = new SolvedSurveyByUser({ userSenderId: user.id });
       const link = `https://snapfan.io/questions?solvedsurveybyusersId=${newSolvedSurveysByUser._id}`;
@@ -417,24 +409,13 @@ app.post('/generate-link', async (req, res) => {
             questionId: answer._id,
             answer: answer.answer,
             question: answer.question,
+            question_pl: answer.question_pl
           }));
-
-
-  
           await solvedSurvey.save();
-  
-  
           return ;
         })
       );
-  
-   
-
-
     //Porównanie i zapisanie do bazy danych matchujących odpowiedzi
-
-      
-
         try {
             const { name, email, solvedSurveyByUserId, responses } = req.body;
             
@@ -443,9 +424,7 @@ app.post('/generate-link', async (req, res) => {
             if (!userA) {
               userA = await User.create({ email, name });
             }
-        
             const solvedSurveysByUserA = await SolvedSurveyByUser.findById(solvedSurveyByUserId);
-        
             // Find all surveys by their ids
             const surveyIds = responses.map((response) => response._id);
             const surveys = await Survey.find({ _id: { $in: surveyIds } });
@@ -456,10 +435,8 @@ app.post('/generate-link', async (req, res) => {
                 message: 'One or more surveys not found',
               });
             }
-        
             // Find the solved surveys for user B
           //  const solvedSurveysByUserB = await SolvedSurveyByUser.findById(solvedSurveyByUserId).populate('solvedSurveys');
-        
           let solvedSurveysByUserB = await SolvedSurveyByUser.aggregate([
             {
             $match: {
@@ -485,9 +462,6 @@ app.post('/generate-link', async (req, res) => {
             }
         ]);
 
-
-
-
         let userB = await SolvedSurveyByUser.aggregate([
           {
           $match: {
@@ -502,9 +476,7 @@ app.post('/generate-link', async (req, res) => {
           },
           }
       ]);
-
-         solvedSurveysByUserB = solvedSurveysByUserB[0]
-        console.log(solvedSurveysByUserB)
+          solvedSurveysByUserB = solvedSurveysByUserB[0]
             const matchedQuestions = [];
         
             // Compare answers between user A and user B for each survey
@@ -519,12 +491,12 @@ app.post('/generate-link', async (req, res) => {
               if (matchedQuestionsForSurvey.length > 0) {
                 matchedQuestions.push({
                   title: responseA.title,
+                  title_pl: responseA.title_pl,
                   surveyId: responseA._id,
                   questions: matchedQuestionsForSurvey,
                 });
               }
             });
-        
             // Save the matched questions and user ids in the matchedQuestionsInSurveys collection
             const matchedQuestionsInSurveys = await MatchedQuestionsInSurveys.create({
               userAId: userA.id,
@@ -532,12 +504,7 @@ app.post('/generate-link', async (req, res) => {
               surveys:surveyIds,
               matchedQuestions:matchedQuestions,
             });
-        
-  
-            
-
             //Sending emails
-
             const transporter = nodemailer.createTransport({
               host: 'pro3.mail.ovh.net', // SMTP server hostname
               port: 587, // SMTP port for SSL/TLS (usually 465 for SSL)
@@ -549,33 +516,43 @@ app.post('/generate-link', async (req, res) => {
                   pass: 'kYssex-fygvy7-zarziq', // Your email password or app-specific password
               },
             });
-            
-            console.log(matchedQuestionsInSurveys._id);
             const link = 'https://snapfan.io/answears/' + matchedQuestionsInSurveys._id;
             
             // Set email options
-            const mailOptions = {
-              from: 'snapfan@snapfan.io', // Sender's email address
-              bcc: [userA.email, userB[0].user[0].email, 'kzyzulek@gmail.com'], // BCC recipients
-              subject: 'Survey Results SnapFan.io', // Email subject
-              text: 'Thank you for using Snapfan. Here is the link to the survey results. ' + link, // Email body
-            };
-            
+            let mailOptions, message, info_res;
+            if(language == "pl") {
+              mailOptions = {
+                from: 'snapfan@snapfan.io', // Sender's email address
+                bcc: [userA.email, userB[0].user[0].email, 'kzyzulek@gmail.com'], // BCC recipients
+                subject: 'Wyniki ankiety SnapFan.io', // Email subject
+                text: 'Dziękujemy za korzystanie z Snapfan. Tutaj rozwiązania ankiety. ' + link, // Email body
+              };
+              info_res = "Email został wysłany: ";
+              message = "Rozwiązane ankiety pomyślnie porównano";
+            }
+            else if(language == "en") {
+              mailOptions = {
+                from: 'snapfan@snapfan.io', // Sender's email address
+                bcc: [userA.email, userB[0].user[0].email, 'kzyzulek@gmail.com'], // BCC recipients
+                subject: 'Survey Results SnapFan.io', // Email subject
+                text: 'Thank you for using Snapfan. Here is the link to the survey results. ' + link, // Email body
+              };
+              info_res = "Email has been sended: ";
+              message = 'Solved surveys compared successfully';
+            }
+
             // Send the email
             transporter.sendMail(mailOptions, function (error, info) {
               if (error) {
                 console.error(error);
                 res.send(error);
               } else {
-                console.log('Email został wysłany: ' + info.response);
-                res.send('Email został wysłany: ' + info.response);
+                console.log(info_res + info.response);
+                res.send(info_res + info.response);
               }
             });
-
-
-        
             return res.json({
-              message: 'Solved surveys compared successfully',
+              message: message,
             });
           } catch (err) {
             console.log(err);
@@ -592,7 +569,6 @@ app.post('/generate-link', async (req, res) => {
 
 
   app.post('/compare-survey-answers', async (req, res) => {
-    console.log("endp2")
     try {
         const { name, email, responses, solvedSurveyByUserId } = req.body;
         const user = await User.findOne({ email }) || await User.create({ email, name });
@@ -733,6 +709,7 @@ app.post('/generate-link', async (req, res) => {
             questionId: answer._id,
             answer: answer.answer,
             question: answer.question,
+            question_pl: answer.question_pl
           }));
   
           await solvedSurvey.save();

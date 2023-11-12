@@ -7,11 +7,13 @@ import Footer3 from "./Footer3";
 import { useLocation } from "react-router-dom";
 import './QuestionsPage.css'; // importowanie pliku CSS
 import { useParams } from "react-router-dom";
+import { LanguageContext } from "../LanguageProvider";
 
 const AnswearPage = () => {
   const { search } = useLocation();
   const [questionPageSurveys, setQuestionPageSurveys] = useState(getQuestionPageSurveys());
   const surveyresults = useParams();
+  const { language } = React.useContext(LanguageContext);
 
   useEffect(() => {
     const unsubscribe = store.subscribe(() => {
@@ -29,14 +31,9 @@ const AnswearPage = () => {
       try {
         const searchParams = new URLSearchParams(search);
        // const surveyresults = searchParams.get("surveyresults");
-
-
-          console.log(surveyresults)
           const link = `https://snapfan.io:3001/matchedquestionsinsurveys/${surveyresults.surveyresults}`;
-        
           let response = await axios.get(link);
           const solvedSurveys = response.data.matchedQuestions
-          console.log(solvedSurveys)
         store.dispatch(updateQuestionPageSurveys(solvedSurveys));
       } catch (error) {
         console.log(error);
@@ -57,10 +54,10 @@ const AnswearPage = () => {
   return (
     <Grommet>
       <NavigationBar2 />
-      <Box pad="medium">
+      <Box pad="medium" >
         {questionPageSurveys.map((survey) => (
-          <Box key={survey._id} margin={{ vertical: "medium" }}>
-            <Heading level={3}>{survey.title}</Heading>
+          <Box key={survey._id} margin={{ vertical: "large" }}>
+            <Heading level={3}>{language == "en" ? survey.title : survey.title_pl}</Heading>
             {survey.questions.map((question, questionIndex) => {
               const cardClass = question.answer === true ? "answered-yes" : question.answer === false ? "answered-no" : "";
 
@@ -72,16 +69,16 @@ const AnswearPage = () => {
                     background="light-1"
                     pad="medium"
                   >
-                    <Text>{question.question}</Text>
+                    <Text>{language == "en" ? question.question : question.question_pl}</Text>
                     <CheckBox
-                      label="Yes"
+                      label={language == "en" ? "Yes" : "Tak"}
                       checked={question.answer === true}
                       onChange={(e) =>
                         handleCheckBoxChange(survey, questionIndex, e.target.checked)
                       }
                     />
                     <CheckBox
-                      label="No"
+                      label={language == "en" ? "No" : "Nie"}
                       checked={question.answer === false}
                       onChange={(e) =>
                         handleCheckBoxChange(survey, questionIndex, !e.target.checked)

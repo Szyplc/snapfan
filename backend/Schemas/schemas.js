@@ -133,7 +133,11 @@ const matchedQuestionsInSurveysSchema = new mongoose.Schema({
     question:{
         type:String,
         required:false
-    }}
+    },
+  question_pl: {
+    type: String,
+    required: false
+  }}
     ]
   }]
 });

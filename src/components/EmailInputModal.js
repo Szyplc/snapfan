@@ -24,7 +24,7 @@ const EmailInputModal = ({ onClose, onSubmit }) => {
   const [visible, setVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationStatus, setNotificationStatus] = useState("");
-  const { translate } = useContext(LanguageContext);
+  const { translate, language } = useContext(LanguageContext);
   const [isLoading, setIsLoading] = useState(false); // add isLoading state variable
 
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -51,7 +51,7 @@ const EmailInputModal = ({ onClose, onSubmit }) => {
     setIsLoading(true); // set isLoading to true
 
     let response;
-
+    console.log(JSON.stringify({ email, name, responses, solvedSurveyByUserId, language }))
     if (solvedSurveyByUserId) {
       response = await fetch(
         "https://snapfan.io:3001/compare-survey-answers",
@@ -60,7 +60,7 @@ const EmailInputModal = ({ onClose, onSubmit }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, name, responses, solvedSurveyByUserId }),
+          body: JSON.stringify({ email, name, responses, solvedSurveyByUserId, language }),
         }
       );
     } else {
