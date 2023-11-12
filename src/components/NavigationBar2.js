@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grommet, Box, Header, Anchor, Nav, TextInput, Select } from "grommet";
 import { FormSearch } from "grommet-icons";
 import { LanguageContext } from "../LanguageProvider";
@@ -9,7 +9,9 @@ function NavigationBar2({ handleSearchChange }) {
   const languageOptions = ["EN", "PL"];
   const { language, setLanguage, translate } = React.useContext(LanguageContext);
   const [selectedLanguage, setSelectedLanguage] = useState(language);
-
+  useEffect(() => {
+    setSelectedLanguage(language)
+  }, [language])
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
     setLanguage(event.target.value.toLowerCase());

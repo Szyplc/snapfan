@@ -488,6 +488,7 @@ app.post('/generate-link', async (req, res) => {
                 //Porównanie ankiet jeeli obydwie się zgadzają na prawdę 
                 return answerB  && answerA.answer === answerB.answer && answerA.answer == true;
               });
+
               if (matchedQuestionsForSurvey.length > 0) {
                 matchedQuestions.push({
                   title: responseA.title,
@@ -502,6 +503,7 @@ app.post('/generate-link', async (req, res) => {
               userAId: userA.id,
               userBId: userB[0].userSenderId,
               surveys:surveyIds,
+              language: language,
               matchedQuestions:matchedQuestions,
             });
             //Sending emails

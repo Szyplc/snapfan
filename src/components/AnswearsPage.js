@@ -13,7 +13,7 @@ const AnswearPage = () => {
   const { search } = useLocation();
   const [questionPageSurveys, setQuestionPageSurveys] = useState(getQuestionPageSurveys());
   const surveyresults = useParams();
-  const { language } = React.useContext(LanguageContext);
+  const { language, setLanguage } = React.useContext(LanguageContext);
 
   useEffect(() => {
     const unsubscribe = store.subscribe(() => {
@@ -33,6 +33,7 @@ const AnswearPage = () => {
        // const surveyresults = searchParams.get("surveyresults");
           const link = `https://snapfan.io:3001/matchedquestionsinsurveys/${surveyresults.surveyresults}`;
           let response = await axios.get(link);
+          setLanguage(response.data.language)
           const solvedSurveys = response.data.matchedQuestions
         store.dispatch(updateQuestionPageSurveys(solvedSurveys));
       } catch (error) {

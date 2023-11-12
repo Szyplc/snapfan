@@ -104,6 +104,10 @@ const matchedQuestionsInSurveysSchema = new mongoose.Schema({
     ref: 'Survey',
     required:true
   }],
+  language: {
+    type: String,
+    required: false
+  },
   matchedQuestions: [{
     surveyId:{
       type: mongoose.Schema.Types.ObjectId,
