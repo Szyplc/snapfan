@@ -31,7 +31,7 @@ const AnswearPage = () => {
       try {
         const searchParams = new URLSearchParams(search);
        // const surveyresults = searchParams.get("surveyresults");
-          const link = `https://snapfan.io:3001/matchedquestionsinsurveys/${surveyresults.surveyresults}`;
+          const link = `http://145.239.93.11:3001/matchedquestionsinsurveys/${surveyresults.surveyresults}`;
           let response = await axios.get(link);
           setLanguage(response.data.language)
           const solvedSurveys = response.data.matchedQuestions

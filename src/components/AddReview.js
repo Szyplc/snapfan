@@ -56,10 +56,10 @@ const AddReview = ({ onClose, onSubmit }) => {
     };
     console.log(JSON.stringify(formValues))
     try {
-        //        "https://snapfan.io:3001/review",
+        //        "http://145.239.93.11:3001/review",
 
       const response = await fetch(
-        "https://snapfan.io:3001/review",
+        "http://145.239.93.11:3001/review",
         {
           method: "POST",
           headers: {

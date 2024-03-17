@@ -41,7 +41,7 @@ const QuestionsPage = () => {
         console.log(selectedSurveys)
         if(solvedsurveybyusersId && solvedsurveybyusersId.solvedsurveybyusersId){
           console.log(solvedsurveybyusersId)
-          const link = `https://snapfan.io:3001/surveys-from-user/${solvedsurveybyusersId.solvedsurveybyusersId}`;
+          const link = `http://145.239.93.11:3001/surveys-from-user/${solvedsurveybyusersId.solvedsurveybyusersId}`;
           response = await axios.get(link);
           const selectedSurveys2 = response.data.surveys
           console.log(link)
@@ -53,7 +53,7 @@ const QuestionsPage = () => {
           //console.log("getSolvedSurveyByUserId")
 
           const selectedSurveysIds = selectedSurveys2
-          const link2 = `https://snapfan.io:3001/surveys/${selectedSurveysIds.join()}`;
+          const link2 = `http://145.239.93.11:3001/surveys/${selectedSurveysIds.join()}`;
           response = await axios.get(link2);
           console.log(response)
 
@@ -62,7 +62,7 @@ const QuestionsPage = () => {
         }else{
             const selectedSurveysIds = selectedSurveys.map(survey => survey._id);
             console.log(selectedSurveysIds.join())
-            const link = `https://snapfan.io:3001/surveys/${selectedSurveysIds.join()}`;
+            const link = `http://145.239.93.11:3001/surveys/${selectedSurveysIds.join()}`;
               console.log(link);
             response = await axios.get(link);
         }
