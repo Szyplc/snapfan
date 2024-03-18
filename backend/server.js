@@ -314,7 +314,7 @@ app.post('/generate-link', async (req, res) => {
    
 
       const newSolvedSurveysByUser = new SolvedSurveyByUser({ userSenderId: user.id });
-      const link = `https://snapfan.io/questions/${newSolvedSurveysByUser._id}`;
+      const link = `http://145.239.93.11/questions/${newSolvedSurveysByUser._id}`;
 
       
       newSolvedSurveysByUser.solvedSurveys = solvedSurveys.map((survey) => survey.id);
@@ -389,7 +389,7 @@ app.post('/generate-link', async (req, res) => {
       );
 
       const newSolvedSurveysByUser = new SolvedSurveyByUser({ userSenderId: user.id });
-      const link = `https://snapfan.io/questions?solvedsurveybyusersId=${newSolvedSurveysByUser._id}`;
+      const link = `http://145.239.93.11/questions?solvedsurveybyusersId=${newSolvedSurveysByUser._id}`;
 
       
       newSolvedSurveysByUser.solvedSurveys = solvedSurveys.map((survey) => survey.id);
@@ -518,7 +518,7 @@ app.post('/generate-link', async (req, res) => {
                   pass: 'kYssex-fygvy7-zarziq', // Your email password or app-specific password
               },
             });
-            const link = 'https://snapfan.io/answears/' + matchedQuestionsInSurveys._id;
+            const link = 'http://145.239.93.11/answears/' + matchedQuestionsInSurveys._id;
             
             // Set email options
             let mailOptions, message, info_res;
@@ -691,7 +691,7 @@ app.post('/generate-link', async (req, res) => {
       const newSolvedSurveysByUser = new SolvedSurveyByUser({ userSenderId: user.id });
       const token = crypto.randomBytes(32).toString('hex');
 
-      const link = `https://snapfan.io:3000/questions?solvedsurveybyusersId=${newSolvedSurveysByUser._id}`;
+      const link = `http://145.239.93.11:3000/questions?solvedsurveybyusersId=${newSolvedSurveysByUser._id}`;
 
       
       newSolvedSurveysByUser.solvedSurveys = solvedSurveys.map((survey) => survey.id);
