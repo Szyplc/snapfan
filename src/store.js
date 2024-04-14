@@ -41,7 +41,7 @@ export const removeSelectedSurvey = (survey) => ({
 
 export const fetchSurveys = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://145.239.93.11:3001/surveys?title=true');
+    const response = await axios.get('http://127.0.0.1:3001/surveys?title=true');
     //const response = await axios.get("http://localhost:3001/surveys?title=true")
     const surveys = response.data;
     console.log(response)
@@ -68,7 +68,7 @@ export const fetchQuestionPageSurveys = () => async (dispatch, getState) => {
   console.log(selectedSurveys);
   const selectedSurveysIds = selectedSurveys.map(survey => survey._id);
   //const link = `http://snapfan.io:3001/surveys/${selectedSurveysIds.join()}`;
-  const link = `http://145.239.93.11:3001/surveys/${selectedSurveysIds.join()}`;
+  const link = `http://127.0.0.1:3001/surveys/${selectedSurveysIds.join()}`;
   const response = await axios.get(link);
   const questionPageSurveys = response.data;
   dispatch({ type: 'FETCH_QUESTION_PAGE_SURVEYS_SUCCESS', payload: questionPageSurveys });

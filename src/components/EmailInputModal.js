@@ -54,7 +54,7 @@ const EmailInputModal = ({ onClose, onSubmit }) => {
     console.log(JSON.stringify({ email, name, responses, solvedSurveyByUserId, language }))
     if (solvedSurveyByUserId) {
       response = await fetch(
-        "http://145.239.93.11:3001/compare-survey-answers",
+        "http://127.0.0.1:3001/compare-survey-answers",
         {
           method: "POST",
           headers: {
@@ -64,7 +64,7 @@ const EmailInputModal = ({ onClose, onSubmit }) => {
         }
       );
     } else {
-      response = await fetch("http://145.239.93.11:3001/generate-link", {
+      response = await fetch("http://127.0.0.1:3001/generate-link", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -194,7 +194,7 @@ export default EmailInputModal;
 
 //   let response;
 //   if (solvedSurveyByUserId) {
-//     response = await fetch("http://145.239.93.11:3001/compare-survey-answers", {
+//     response = await fetch("http://127.0.0.1:3001/compare-survey-answers", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -202,7 +202,7 @@ export default EmailInputModal;
 //       body: JSON.stringify({ email, name, responses, solvedSurveyByUserId }),
 //     });
 //   } else {
-//     response = await fetch("http://145.239.93.11:3001/generate-link", {
+//     response = await fetch("http://127.0.0.1:3001/generate-link", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
