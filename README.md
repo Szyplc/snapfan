@@ -1,70 +1,13 @@
-# Getting Started with Create React App
+#Aplikacja która pozwala dwóm osobą porównać swoje odpowiedzi w ankietach.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![1](https://github.com/Szyplc/snapfan/assets/62036365/d82485df-a4ad-4cda-8d40-ff7be4a88b4e)
+![2](https://github.com/Szyplc/snapfan/assets/62036365/d48110d4-bb57-402b-be58-3642416c3868)
+![3](https://github.com/Szyplc/snapfan/assets/62036365/7cbd90ae-f62b-48ad-a2c4-44f6a66de1b0)
+![4](https://github.com/Szyplc/snapfan/assets/62036365/1092e7fd-3492-4dc2-b5e4-38e655f787dc)
+![5](https://github.com/Szyplc/snapfan/assets/62036365/13024a69-d02d-4d01-a03c-3a95869bba76)
+![6](https://github.com/Szyplc/snapfan/assets/62036365/ae700b5b-5d34-4f06-b28c-ec60053bf1e3)
+![7](https://github.com/Szyplc/snapfan/assets/62036365/ca738eb3-b667-4ff7-b180-722c07e9effd)
+![8](https://github.com/Szyplc/snapfan/assets/62036365/07b3dc43-bceb-480e-927b-d3b9f4516cdc)
+![9](https://github.com/Szyplc/snapfan/assets/62036365/548c06c9-40ac-404e-8d94-6bf0493398f6)
+![10](https://github.com/Szyplc/snapfan/assets/62036365/bc9033d8-e6cf-45e6-9de4-8add9627d94e)
+![11](https://github.com/Szyplc/snapfan/assets/62036365/e45e5e57-0930-4e4d-a73a-f96ce365628f)
