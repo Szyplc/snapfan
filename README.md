@@ -9,7 +9,7 @@
   5. Po rozwiązaniu na maila dostajemy wyniki ankiety
   6. Dostajemy w jakich pytaniach się zgadzamy
 
-#Tak wygląda: 
+# Tak wygląda: 
 
 ![1](https://github.com/Szyplc/snapfan/assets/62036365/d82485df-a4ad-4cda-8d40-ff7be4a88b4e)
 ![2](https://github.com/Szyplc/snapfan/assets/62036365/d48110d4-bb57-402b-be58-3642416c3868)
